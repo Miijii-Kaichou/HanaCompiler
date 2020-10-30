@@ -9,7 +9,7 @@ namespace Hana.CodeAnalysis
             LiteralToken = literalToken;
         }
 
-        public override SyntaxKind Kind => SyntaxKind.NumberExpressionToken;
+        public override SyntaxKind Kind => SyntaxKind.LiteralExpressionToken;
 
         public SyntaxToken LiteralToken { get; }
 

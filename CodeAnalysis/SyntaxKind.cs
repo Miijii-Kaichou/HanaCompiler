@@ -21,7 +21,7 @@
         KeywordToken,
         
         //Expressions
-        NumberExpressionToken,
+        LiteralExpressionToken,
         BinaryExpressionToken,
         ParenExpressionToken
     }
