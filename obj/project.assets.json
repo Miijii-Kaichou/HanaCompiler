@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\Hana.csproj",
+      "projectUniqueName": "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaCompiler\\Hana.csproj",
       "projectName": "Hana",
-      "projectPath": "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\Hana.csproj",
+      "projectPath": "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaCompiler\\Hana.csproj",
       "packagesPath": "C:\\Users\\tclte\\.nuget\\packages\\",
-      "outputPath": "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\obj\\",
+      "outputPath": "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaCompiler\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
