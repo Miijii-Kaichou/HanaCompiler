@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Hana.CodeAnalysis
 {
+
     internal sealed class Parser
     {
         private readonly SyntaxToken[] _tokens;
@@ -66,7 +68,19 @@ namespace Hana.CodeAnalysis
 
         private ExpressionSyntax ParseExpression(int parentPrecedence = 0)
         {
-            var left = ParsePrimaryExpression();
+            ExpressionSyntax left;
+            
+            var unaryOperatorPrecedence = Current.Kind.GetUnaryOperatorPrecedence();
+            if(unaryOperatorPrecedence != 0 && unaryOperatorPrecedence >= parentPrecedence)
+            {
+                var operatorToken = NextToken();
+                var operand = ParseExpression(unaryOperatorPrecedence);
+                left = new UnaryExpressionSyntax(operatorToken, operand);
+
+            } else
+            {
+                left = ParsePrimaryExpression();
+            }
 
             while (true)
             {

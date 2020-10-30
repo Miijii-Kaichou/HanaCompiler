@@ -22,6 +22,7 @@
         
         //Expressions
         LiteralExpressionToken,
+        UnaryExpressionToken,
         BinaryExpressionToken,
         ParenExpressionToken
     }
