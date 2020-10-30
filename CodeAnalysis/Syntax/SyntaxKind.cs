@@ -1,4 +1,4 @@
-﻿namespace Hana.CodeAnalysis
+﻿namespace Hana.CodeAnalysis.Syntax
 {
     public enum SyntaxKind
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using Hana.CodeAnalysis.Syntax;
 
 namespace Hana.CodeAnalysis
 {

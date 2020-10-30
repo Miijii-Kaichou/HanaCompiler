@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Hana.CodeAnalysis
+namespace Hana.CodeAnalysis.Syntax
 {
     public sealed class SyntaxToken : SyntaxNode
     {

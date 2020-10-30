@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Hana.CodeAnalysis
+namespace Hana.CodeAnalysis.Syntax
 {
     internal sealed class Lexer
     {

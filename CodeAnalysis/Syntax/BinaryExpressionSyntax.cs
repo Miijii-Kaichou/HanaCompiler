@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Hana.CodeAnalysis
+namespace Hana.CodeAnalysis.Syntax
 {
     public sealed class BinaryExpressionSyntax : ExpressionSyntax
     {
@@ -10,11 +10,10 @@ namespace Hana.CodeAnalysis
             OperatorToken = operatorToken;
             Right = right;
         }
-
+        public override SyntaxKind Kind => SyntaxKind.BinaryExpressionToken;
         public ExpressionSyntax Left { get; }
         public SyntaxToken OperatorToken { get; }
         public ExpressionSyntax Right { get; }
-        public override SyntaxKind Kind => SyntaxKind.BinaryExpressionToken;
 
         public override IEnumerable<SyntaxNode> GetChildren()
         {
