@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Hana.CodeAnalysis
 {
@@ -64,39 +65,70 @@ namespace Hana.CodeAnalysis
             return new SyntaxTree(_diagnostics, expression, EOFToken);
         }
 
-
-        private ExpressionSyntax ParseExpression()
-        {
-            return ParseTerm();
-        }
-
-       
-        public ExpressionSyntax ParseTerm()
-        {
-            var left = ParseFactor();
-            while (Current.Kind == SyntaxKind.PlusToken ||
-                Current.Kind == SyntaxKind.MinusToken)
-            {
-                var operatorToken = NextToken();
-                var right = ParseFactor();
-                left = new BinaryExpressionSyntax(left, operatorToken, right);
-            }
-
-            return left;
-        }
-
-        public ExpressionSyntax ParseFactor()
+        private ExpressionSyntax ParseExpression(int parentPrecedence = 0)
         {
             var left = ParsePrimaryExpression();
-            while (Current.Kind == SyntaxKind.MultiplyToken ||
-                Current.Kind == SyntaxKind.DivideToken)
+
+            while (true)
             {
+                var precedence = GetBinaryOperatorPrecedence(Current.Kind);
+                if (precedence == 0 || precedence <= parentPrecedence)
+                    break;
+
                 var operatorToken = NextToken();
-                var right = ParsePrimaryExpression();
+                var right = ParseExpression(precedence);
                 left = new BinaryExpressionSyntax(left, operatorToken, right);
             }
 
-            return left;
+           return left;
+        }
+
+        private static int GetBinaryOperatorPrecedence(SyntaxKind kind)
+        {
+            switch (kind)
+            {
+                case SyntaxKind.BadToken:
+                    break;
+                case SyntaxKind.EOFToken:
+                    break;
+                case SyntaxKind.WhiteSpaceToken:
+                    break;
+                case SyntaxKind.NumberToken:
+                    break;
+                case SyntaxKind.PlusToken:
+                case SyntaxKind.MinusToken:
+                    return 1;
+
+                case SyntaxKind.MultiplyToken:
+                case SyntaxKind.DivideToken:
+                    return 2;
+                case SyntaxKind.LParenToken:
+                    break;
+                case SyntaxKind.RParenToken:
+                    break;
+                case SyntaxKind.LBrackToken:
+                    break;
+                case SyntaxKind.RBrackToken:
+                    break;
+                case SyntaxKind.LCurlToken:
+                    break;
+                case SyntaxKind.RCurlToken:
+                    break;
+                case SyntaxKind.OperatorToken:
+                    break;
+                case SyntaxKind.KeywordToken:
+                    break;
+                case SyntaxKind.LiteralExpressionToken:
+                    break;
+                case SyntaxKind.BinaryExpressionToken:
+                    break;
+                case SyntaxKind.ParenExpressionToken:
+                    break;
+                default:
+                    return 0;
+            }
+
+            return -1;
         }
 
         private ExpressionSyntax ParsePrimaryExpression()

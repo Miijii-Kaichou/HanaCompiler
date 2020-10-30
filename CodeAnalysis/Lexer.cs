@@ -28,26 +28,22 @@ namespace Hana.CodeAnalysis
             }
         }
 
-        private int Next()
+        private int Lex()
         {
             //Go to next character
             return _position++;
         }
 
-        private SyntaxToken ThrowError(out string errorMessage)
+        private SyntaxToken ThrowTokenError(out string errorMessage)
         {
             string _errorMSG = $"ERROR : bad character input: '{Current }'";
             errorMessage = _errorMSG;
             _diagnostics.Add(_errorMSG);
-            return new SyntaxToken(SyntaxKind.BadToken, Next(), _text.Substring(_position - 1, 1), null);
+            return new SyntaxToken(SyntaxKind.BadToken, Lex(), _text.Substring(_position - 1, 1), null);
         }
 
         public SyntaxToken NextToken()
         {
-            // Numbers
-            // + - * / ( ) { } [ ]
-            // whitespace
-
             if (_position >= _text.Length)
                 return new SyntaxToken(SyntaxKind.EOFToken, _position, "\0", null);
 
@@ -56,7 +52,7 @@ namespace Hana.CodeAnalysis
                 var start = _position;
 
                 while (char.IsDigit(Current))
-                    Next();
+                    Lex();
 
                 var length = _position - start;
                 var text = _text.Substring(start, length);
@@ -75,7 +71,7 @@ namespace Hana.CodeAnalysis
                 var start = _position;
                 while (char.IsWhiteSpace(Current))
                 {
-                    Next();
+                    Lex();
                 }
 
                 var length = _position - start;
@@ -85,17 +81,17 @@ namespace Hana.CodeAnalysis
 
             return Current switch
             {
-                '+' => new SyntaxToken(SyntaxKind.PlusToken, Next(), "+", null),
-                '-' => new SyntaxToken(SyntaxKind.MinusToken, Next(), "-", null),
-                '*' => new SyntaxToken(SyntaxKind.MultiplyToken, Next(), "*", null),
-                '/' => new SyntaxToken(SyntaxKind.DivideToken, Next(), "/", null),
-                '(' => new SyntaxToken(SyntaxKind.LParenToken, Next(), "(", null),
-                ')' => new SyntaxToken(SyntaxKind.RParenToken, Next(), ")", null),
-                '[' => new SyntaxToken(SyntaxKind.LBrackToken, Next(), "[", null),
-                ']' => new SyntaxToken(SyntaxKind.RBrackToken, Next(), "]", null),
-                '{' => new SyntaxToken(SyntaxKind.LCurlToken, Next(), "{", null),
-                '}' => new SyntaxToken(SyntaxKind.RCurlToken, Next(), "}", null),
-                _ => ThrowError(out string errorMSG),
+                '+' => new SyntaxToken(SyntaxKind.PlusToken, Lex(), "+", null),
+                '-' => new SyntaxToken(SyntaxKind.MinusToken, Lex(), "-", null),
+                '*' => new SyntaxToken(SyntaxKind.MultiplyToken, Lex(), "*", null),
+                '/' => new SyntaxToken(SyntaxKind.DivideToken, Lex(), "/", null),
+                '(' => new SyntaxToken(SyntaxKind.LParenToken, Lex(), "(", null),
+                ')' => new SyntaxToken(SyntaxKind.RParenToken, Lex(), ")", null),
+                '[' => new SyntaxToken(SyntaxKind.LBrackToken, Lex(), "[", null),
+                ']' => new SyntaxToken(SyntaxKind.RBrackToken, Lex(), "]", null),
+                '{' => new SyntaxToken(SyntaxKind.LCurlToken, Lex(), "{", null),
+                '}' => new SyntaxToken(SyntaxKind.RCurlToken, Lex(), "}", null),
+                _ => ThrowTokenError(out string errorMSG),
             };
         }
     }
