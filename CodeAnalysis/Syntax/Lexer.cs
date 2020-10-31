@@ -83,8 +83,8 @@ namespace Hana.CodeAnalysis.Syntax
             {
                 '+' => new SyntaxToken(SyntaxKind.PlusToken, Lex(), "+", null),
                 '-' => new SyntaxToken(SyntaxKind.MinusToken, Lex(), "-", null),
-                '*' => new SyntaxToken(SyntaxKind.MultiplyToken, Lex(), "*", null),
-                '/' => new SyntaxToken(SyntaxKind.DivideToken, Lex(), "/", null),
+                '*' => new SyntaxToken(SyntaxKind.StarToken, Lex(), "*", null),
+                '/' => new SyntaxToken(SyntaxKind.FSlashToken, Lex(), "/", null),
                 '(' => new SyntaxToken(SyntaxKind.LParenToken, Lex(), "(", null),
                 ')' => new SyntaxToken(SyntaxKind.RParenToken, Lex(), ")", null),
                 '[' => new SyntaxToken(SyntaxKind.LBrackToken, Lex(), "[", null),

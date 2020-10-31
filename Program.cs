@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Hana.CodeAnalysis;
+using Hana.CodeAnalysis.Binding;
 using Hana.CodeAnalysis.Syntax;
 
 namespace Hana
@@ -30,6 +32,9 @@ namespace Hana
                 }
 
                 var syntaxTree = SyntaxTree.Parse(line);
+                var binder = new Binder();
+                var boundExpression = binder.BindExpression(syntaxTree.Root);
+                var diagnostics = syntaxTree.Diagnostics.Concat(binder.Diagnostics).ToArray();
 
                 if (showTree)
                 {
@@ -40,9 +45,10 @@ namespace Hana
                     Console.ResetColor();
                 }
 
-                if (!syntaxTree.Diagnostics.Any())
+
+                if (!diagnostics.Any())
                 {
-                    var evaluator = new Evaluator(syntaxTree.Root);
+                    var evaluator = new Evaluator(boundExpression);
                     var result = evaluator.Evaluate();
                     Console.WriteLine(result);
                 }

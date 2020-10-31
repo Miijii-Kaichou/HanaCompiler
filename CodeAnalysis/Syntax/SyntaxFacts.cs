@@ -1,4 +1,4 @@
-﻿namespace Hana.CodeAnalysis
+﻿namespace Hana.CodeAnalysis.Syntax
 {
     /// <summary>
     /// Store all information of our syntax
@@ -26,8 +26,8 @@
                 case SyntaxKind.MinusToken:
                     return 1;
 
-                case SyntaxKind.MultiplyToken:
-                case SyntaxKind.DivideToken:
+                case SyntaxKind.StarToken:
+                case SyntaxKind.FSlashToken:
                     return 2;
 
                 default:
