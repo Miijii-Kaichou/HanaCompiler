@@ -20,21 +20,23 @@ namespace Hana
                 if (string.IsNullOrWhiteSpace(line))
                     return;
 
-                if(line == "#showTree")
+                if (line == "#showTree")
                 {
                     showTree = !showTree;
                     Console.WriteLine(showTree ? "Showing parse trees." : "Not showing parse trees");
                     continue;
-                } else if (line == "#cls")
+                }
+                else if (line == "#cls")
                 {
                     Console.Clear();
                     continue;
                 }
 
                 var syntaxTree = SyntaxTree.Parse(line);
-                var binder = new Binder();
-                var boundExpression = binder.BindExpression(syntaxTree.Root);
-                var diagnostics = syntaxTree.Diagnostics.Concat(binder.Diagnostics).ToArray();
+                var compilation = new Compilation(syntaxTree);
+                var result = compilation.Evaluate();
+
+                var diagnostics = result.Diagnostics;
 
                 if (showTree)
                 {
@@ -48,20 +50,36 @@ namespace Hana
 
                 if (!diagnostics.Any())
                 {
-                    var evaluator = new Evaluator(boundExpression);
-                    var result = evaluator.Evaluate();
-                    Console.WriteLine(result);
+                    Console.WriteLine(result.Value);
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
 
                     foreach (var diagnostic in diagnostics)
                     {
+                        Console.WriteLine();
+
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine(diagnostic);
+                        Console.ResetColor();
+
+                        var prefix = line.Substring(0, diagnostic.Span.Start);
+                        var error = line.Substring(diagnostic.Span.Start, diagnostic.Span.Length);
+                        var suffix = line.Substring(diagnostic.Span.End);
+
+                        Console.Write("   ");
+                        Console.Write(prefix);
+
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write(error);
+                        Console.ResetColor();
+
+                        Console.Write(suffix);
+
+                        Console.WriteLine();
                     }
 
-                    Console.ResetColor();
+                    Console.WriteLine();
                 }
             }
         }

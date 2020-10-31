@@ -1,0 +1,16 @@
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\HC.csprojAssemblyReference.cache
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\HC.AssemblyInfoInputs.cache
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\HC.AssemblyInfo.cs
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\HC.csproj.CoreCompileInputs.cache
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\bin\Debug\netcoreapp3.1\HC.exe
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\bin\Debug\netcoreapp3.1\HC.deps.json
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\bin\Debug\netcoreapp3.1\HC.runtimeconfig.json
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\bin\Debug\netcoreapp3.1\HC.runtimeconfig.dev.json
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\bin\Debug\netcoreapp3.1\HC.dll
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\bin\Debug\netcoreapp3.1\HC.pdb
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\bin\Debug\netcoreapp3.1\Hana.dll
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\bin\Debug\netcoreapp3.1\Hana.pdb
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\HC.csproj.CopyComplete
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\HC.dll
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\HC.pdb
+E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\HC.genruntimeconfig.cache

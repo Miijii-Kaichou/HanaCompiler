@@ -11,16 +11,7 @@ E:\Documents\Repositories\C#\HanaCompiler\HanaC\obj\Debug\netcoreapp3.1\Hana.csp
 E:\Documents\Repositories\C#\HanaCompiler\HanaC\obj\Debug\netcoreapp3.1\Hana.dll
 E:\Documents\Repositories\C#\HanaCompiler\HanaC\obj\Debug\netcoreapp3.1\Hana.pdb
 E:\Documents\Repositories\C#\HanaCompiler\HanaC\obj\Debug\netcoreapp3.1\Hana.genruntimeconfig.cache
-E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\bin\Debug\netcoreapp3.1\Hana.exe
-E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\bin\Debug\netcoreapp3.1\Hana.deps.json
-E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\bin\Debug\netcoreapp3.1\Hana.runtimeconfig.json
-E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\bin\Debug\netcoreapp3.1\Hana.runtimeconfig.dev.json
-E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\bin\Debug\netcoreapp3.1\Hana.dll
-E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\bin\Debug\netcoreapp3.1\Hana.pdb
 E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\Hana.csprojAssemblyReference.cache
 E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\Hana.AssemblyInfoInputs.cache
 E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\Hana.AssemblyInfo.cs
 E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\Hana.csproj.CoreCompileInputs.cache
-E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\Hana.dll
-E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\Hana.pdb
-E:\Documents\Repositories\C#\HanaCompiler\HanaC\HanaCompiler\obj\Debug\netcoreapp3.1\Hana.genruntimeconfig.cache

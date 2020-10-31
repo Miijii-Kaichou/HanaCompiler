@@ -6,6 +6,14 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "HC/1.0.0": {
+        "dependencies": {
+          "Hana": "1.0.0"
+        },
+        "runtime": {
+          "HC.dll": {}
+        }
+      },
       "Hana/1.0.0": {
         "runtime": {
           "Hana.dll": {}
@@ -14,6 +22,11 @@
     }
   },
   "libraries": {
+    "HC/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Hana/1.0.0": {
       "type": "project",
       "serviceable": false,
