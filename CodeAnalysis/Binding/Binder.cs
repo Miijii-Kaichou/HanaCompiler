@@ -17,8 +17,16 @@ namespace Hana.CodeAnalysis.Binding
                 SyntaxKind.LiteralExpressionToken => BindLiteralExpression((LiteralExpressionSyntax)syntax),
                 SyntaxKind.UnaryExpressionToken => BindUnaryExpression((UnaryExpressionSyntax)syntax),
                 SyntaxKind.BinaryExpressionToken => BindBinaryExpression((BinaryExpressionSyntax)syntax),
+                SyntaxKind.ParenExpressionToken => BindExpression(((ParenthesizedExpressionSyntax)syntax).Expression),
                 _ => throw new Exception($"Unexpected syntax {syntax.Kind}"),
             };
+        }
+
+        private BoundExpression BindLiteralExpression(LiteralExpressionSyntax syntax)
+        {
+
+            var value = syntax.Value ?? 0;
+            return new BoundLiteralExpression(value);
         }
 
         private BoundExpression BindUnaryExpression(UnaryExpressionSyntax syntax)
@@ -50,11 +58,6 @@ namespace Hana.CodeAnalysis.Binding
             return new BoundBinaryExpression(boundLeft, boundOperator, boundRight);
         }
 
-        private BoundExpression BindLiteralExpression(LiteralExpressionSyntax syntax)
-        {
-
-            var value = syntax.Value ?? 0;
-            return new BoundLiteralExpression(value);
-        }
+        
     }
 }
