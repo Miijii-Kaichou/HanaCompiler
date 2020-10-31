@@ -19,6 +19,14 @@
         RCurlToken,
         OperatorToken,
         IdentifierToken,
+        ExclamToken,
+        AndToken,
+        OrToken,
+        RArrowToken,
+        DoubleLArrowToken,
+        LArrowToken,
+        AmpToken,
+        PipeToken,
 
         //Keywords
         FalseKeyword,

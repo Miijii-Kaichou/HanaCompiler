@@ -15,31 +15,24 @@ namespace Hana.CodeAnalysis.Syntax
 
         public IEnumerable<string> Diagnostics => _diagnostics;
 
-        private char Current
+        private char Current => Peek(0);
+        private char Ahead => Peek(1);
+        private char Peek(int offset)
         {
-            get
-            {
-                //Return nothing
-                if (_position >= _text.Length)
-                    return '\0';
+            var index = _position + offset;
 
-                //Get the current character
-                return _text[_position];
-            }
+            //Return nothing
+            if (index >= _text.Length)
+                return '\0';
+
+            //Get the current character
+            return _text[index];
         }
 
         private int Next()
         {
             //Go to next character
             return _position++;
-        }
-
-        private SyntaxToken ThrowTokenError(out string errorMessage)
-        {
-            string _errorMSG = $"ERROR : bad character input: '{Current }'";
-            errorMessage = _errorMSG;
-            _diagnostics.Add(_errorMSG);
-            return new SyntaxToken(SyntaxKind.BadToken, Next(), _text.Substring(_position - 1, 1), null);
         }
 
         public SyntaxToken Lex()
@@ -95,20 +88,46 @@ namespace Hana.CodeAnalysis.Syntax
             // True 
             // False
 
-            return Current switch
+            switch (Current)
             {
-                '+' => new SyntaxToken(SyntaxKind.PlusToken, Next(), "+", null),
-                '-' => new SyntaxToken(SyntaxKind.MinusToken, Next(), "-", null),
-                '*' => new SyntaxToken(SyntaxKind.StarToken, Next(), "*", null),
-                '/' => new SyntaxToken(SyntaxKind.FSlashToken, Next(), "/", null),
-                '(' => new SyntaxToken(SyntaxKind.LParenToken, Next(), "(", null),
-                ')' => new SyntaxToken(SyntaxKind.RParenToken, Next(), ")", null),
-                '[' => new SyntaxToken(SyntaxKind.LBrackToken, Next(), "[", null),
-                ']' => new SyntaxToken(SyntaxKind.RBrackToken, Next(), "]", null),
-                '{' => new SyntaxToken(SyntaxKind.LCurlToken, Next(), "{", null),
-                '}' => new SyntaxToken(SyntaxKind.RCurlToken, Next(), "}", null),
-                _ => ThrowTokenError(out string errorMSG),
-            };
+                case '+': return new SyntaxToken(SyntaxKind.PlusToken, Next(), "+", null);
+                case '-': return new SyntaxToken(SyntaxKind.MinusToken, Next(), "-", null);
+                case '*': return new SyntaxToken(SyntaxKind.StarToken, Next(), "*", null);
+                case '/': return new SyntaxToken(SyntaxKind.FSlashToken, Next(), "/", null);
+                case '(': return new SyntaxToken(SyntaxKind.LParenToken, Next(), "(", null);
+                case ')': return new SyntaxToken(SyntaxKind.RParenToken, Next(), ")", null);
+                case '[': return new SyntaxToken(SyntaxKind.LBrackToken, Next(), "[", null);
+                case ']': return new SyntaxToken(SyntaxKind.RBrackToken, Next(), "]", null);
+                case '{': return new SyntaxToken(SyntaxKind.LCurlToken, Next(), "{", null);
+                case '}': return new SyntaxToken(SyntaxKind.RCurlToken, Next(), "}", null);
+                case '<':
+                    {
+                        // <<
+                        if (Ahead == '<')
+                            return new SyntaxToken(SyntaxKind.DoubleLArrowToken, _position += 2, "<<", null);
+                        return new SyntaxToken(SyntaxKind.LArrowToken, Next(), "<", null);
+                    }
+                case '>': return new SyntaxToken(SyntaxKind.RArrowToken, Next(), ">", null);
+                case '!': return new SyntaxToken(SyntaxKind.ExclamToken, Next(), "!", null);
+                case '&':
+                    {
+                        // &&
+                        if (Ahead == '&')
+                            return new SyntaxToken(SyntaxKind.AndToken, _position += 2, "&&", null);
+
+                        return new SyntaxToken(SyntaxKind.AmpToken, Next(), "&", null);
+                    }
+                case '|':
+                    {
+                        // ||
+                        if (Ahead == '|')
+                            return new SyntaxToken(SyntaxKind.OrToken, _position += 2, "||", null);
+                        return new SyntaxToken(SyntaxKind.PipeToken, Next(), "|", null);
+                    }
+                default:
+                    _diagnostics.Add($"ERROR : bad character input: '{Current }'");
+                    return new SyntaxToken(SyntaxKind.BadToken, Next(), _text.Substring(_position - 1, 1), null);
+            }
         }
     }
 }
