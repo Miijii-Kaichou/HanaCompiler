@@ -18,7 +18,11 @@
         LCurlToken,
         RCurlToken,
         OperatorToken,
-        KeywordToken,
+        IdentifierToken,
+
+        //Keywords
+        FalseKeyword,
+        TrueKeyword,
         
         //Expressions
         LiteralExpressionToken,

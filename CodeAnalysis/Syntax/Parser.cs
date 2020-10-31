@@ -3,7 +3,10 @@
 
 namespace Hana.CodeAnalysis.Syntax
 {
-
+    /// <summary>
+    /// Evaluates the tokens given from Lexer
+    /// When modding, always feed a token to the parser.
+    /// </summary>
     internal sealed class Parser
     {
         private readonly SyntaxToken[] _tokens;
@@ -69,15 +72,16 @@ namespace Hana.CodeAnalysis.Syntax
         private ExpressionSyntax ParseExpression(int parentPrecedence = 0)
         {
             ExpressionSyntax left;
-            
+
             var unaryOperatorPrecedence = Current.Kind.GetUnaryOperatorPrecedence();
-            if(unaryOperatorPrecedence != 0 && unaryOperatorPrecedence >= parentPrecedence)
+            if (unaryOperatorPrecedence != 0 && unaryOperatorPrecedence >= parentPrecedence)
             {
                 var operatorToken = NextToken();
                 var operand = ParseExpression(unaryOperatorPrecedence);
                 left = new UnaryExpressionSyntax(operatorToken, operand);
 
-            } else
+            }
+            else
             {
                 left = ParsePrimaryExpression();
             }
@@ -93,22 +97,35 @@ namespace Hana.CodeAnalysis.Syntax
                 left = new BinaryExpressionSyntax(left, operatorToken, right);
             }
 
-           return left;
+            return left;
         }
 
-        
+
         private ExpressionSyntax ParsePrimaryExpression()
         {
-            if (Current.Kind == SyntaxKind.LParenToken)
+            switch (Current.Kind)
             {
-                var left = NextToken();
-                var expression = ParseExpression();
-                var right = MatchToken(SyntaxKind.RParenToken);
-                return new ParenthesizedExpressionSyntax(left, expression, right);
-            }
+                case SyntaxKind.LParenToken:
+                {
+                    var left = NextToken();
+                    var expression = ParseExpression();
+                    var right = MatchToken(SyntaxKind.RParenToken);
+                    return new ParenthesizedExpressionSyntax(left, expression, right);
+                }
 
-            var numberToken = MatchToken(SyntaxKind.NumberToken);
-            return new LiteralExpressionSyntax(numberToken);
+                case SyntaxKind.TrueKeyword:
+                case SyntaxKind.FalseKeyword:
+                {
+                    var keywordToken = NextToken();
+                    var value = Current.Kind == SyntaxKind.TrueKeyword;
+                    return new LiteralExpressionSyntax(keywordToken, value);
+                }
+                default:
+                {
+                    var numberToken = MatchToken(SyntaxKind.NumberToken);
+                    return new LiteralExpressionSyntax(numberToken);
+                }
+            }    
         }
     }
 }

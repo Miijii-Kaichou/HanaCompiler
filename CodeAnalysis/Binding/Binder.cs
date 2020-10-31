@@ -3,15 +3,12 @@ using System;
 using System.Collections.Generic;
 
 namespace Hana.CodeAnalysis.Binding
-
 {
     internal sealed class Binder
     {
         private readonly List<string> _diagnostics = new List<string>();
 
         public IEnumerable<string> Diagnostics => _diagnostics;
-
-        private BoundUnaryOperatorKind boundOperandKind;
 
         public BoundExpression BindExpression(ExpressionSyntax syntax)
         {
@@ -34,11 +31,15 @@ namespace Hana.CodeAnalysis.Binding
             var boundLeft= BindExpression(syntax.Left);
             var boundRight = BindExpression(syntax.Right);
             var boundOperatorKind = BindBinaryOperatorKind(syntax.OperatorToken.Kind, boundLeft.Type, boundRight.Type);
+
+
             if (boundOperatorKind == null)
             {
+                
                 _diagnostics.Add($"Binary operator '{syntax.OperatorToken.Text}' is not defined for types {boundLeft.Type} and {boundRight.Type}.");
                 return boundLeft;
             }
+
             return new BoundBinaryExpression(boundLeft, boundOperatorKind.Value, boundRight);
         }
 
@@ -92,7 +93,8 @@ namespace Hana.CodeAnalysis.Binding
 
         private BoundExpression BindLiteralExpression(LiteralExpressionSyntax syntax)
         {
-            var value = syntax.LiteralToken.Value as int? ?? 0;
+
+            var value = syntax.Value ?? 0;
             return new BoundLiteralExpression(value);
         }
     }

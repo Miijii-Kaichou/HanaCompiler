@@ -1,4 +1,6 @@
-﻿namespace Hana.CodeAnalysis.Syntax
+﻿using System;
+
+namespace Hana.CodeAnalysis.Syntax
 {
     /// <summary>
     /// Store all information of our syntax
@@ -35,5 +37,17 @@
             }
         }
 
+        public static SyntaxKind GetKeywordKind(string text)
+        {
+            switch (text)
+            {
+                case "true":
+                    return SyntaxKind.TrueKeyword;
+                case "false":
+                    return SyntaxKind.FalseKeyword;
+                default:
+                    return SyntaxKind.IdentifierToken;
+            }
+        }
     }
 }
