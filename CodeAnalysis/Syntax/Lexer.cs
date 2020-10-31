@@ -108,7 +108,14 @@ namespace Hana.CodeAnalysis.Syntax
                         return new SyntaxToken(SyntaxKind.LArrowToken, Next(), "<", null);
                     }
                 case '>': return new SyntaxToken(SyntaxKind.RArrowToken, Next(), ">", null);
-                case '!': return new SyntaxToken(SyntaxKind.ExclamToken, Next(), "!", null);
+                case '!':
+                    {
+                        // !=
+                        if (Ahead == '=')
+                            return new SyntaxToken(SyntaxKind.InEqulityToken, _position += 2, "!=", null);
+                        return new SyntaxToken(SyntaxKind.ExclamToken, Next(), "!", null);
+                    }
+                    
                 case '&':
                     {
                         // &&
@@ -123,6 +130,13 @@ namespace Hana.CodeAnalysis.Syntax
                         if (Ahead == '|')
                             return new SyntaxToken(SyntaxKind.OrToken, _position += 2, "||", null);
                         return new SyntaxToken(SyntaxKind.PipeToken, Next(), "|", null);
+                    }
+                case '=':
+                    {
+                        // ==
+                        if (Ahead == '=')
+                            return new SyntaxToken(SyntaxKind.EquilityToken, _position += 2, "==", null);
+                        return new SyntaxToken(SyntaxKind.PipeToken, Next(), "=", null);
                     }
                 default:
                     _diagnostics.Add($"ERROR : bad character input: '{Current }'");

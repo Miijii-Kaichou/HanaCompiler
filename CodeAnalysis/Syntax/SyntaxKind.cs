@@ -27,6 +27,8 @@
         LArrowToken,
         AmpToken,
         PipeToken,
+        EquilityToken,
+        InEqulityToken,
 
         //Keywords
         FalseKeyword,
