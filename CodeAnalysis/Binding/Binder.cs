@@ -12,55 +12,13 @@ namespace Hana.CodeAnalysis.Binding
 
         public BoundExpression BindExpression(ExpressionSyntax syntax)
         {
-            switch (syntax.Kind)
+            return syntax.Kind switch
             {
-                case SyntaxKind.LiteralExpressionToken:
-                    return BindLiteralExpression((LiteralExpressionSyntax)syntax);
-                case SyntaxKind.UnaryExpressionToken:
-                    return BindUnaryExpression((UnaryExpressionSyntax)syntax);
-                case SyntaxKind.BinaryExpressionToken:
-                    return BindBinaryExpression((BinaryExpressionSyntax)syntax);
-
-                default:
-                    throw new Exception($"Unexpected syntax {syntax.Kind}");
-            }
-        }
-
-        private BoundExpression BindBinaryExpression(BinaryExpressionSyntax syntax)
-        {
-            var boundLeft= BindExpression(syntax.Left);
-            var boundRight = BindExpression(syntax.Right);
-            var boundOperatorKind = BindBinaryOperatorKind(syntax.OperatorToken.Kind, boundLeft.Type, boundRight.Type);
-
-
-            if (boundOperatorKind == null)
-            {
-                
-                _diagnostics.Add($"Binary operator '{syntax.OperatorToken.Text}' is not defined for types {boundLeft.Type} and {boundRight.Type}.");
-                return boundLeft;
-            }
-
-            return new BoundBinaryExpression(boundLeft, boundOperatorKind.Value, boundRight);
-        }
-
-        private BoundBinaryOperatorKind? BindBinaryOperatorKind(SyntaxKind kind, Type leftType, Type rightType)
-        {
-            if (leftType != typeof(int) && rightType != typeof(int))
-                return null;
-       
-            switch (kind)
-            {
-                case SyntaxKind.PlusToken:
-                    return BoundBinaryOperatorKind.Addition;
-                case SyntaxKind.MinusToken:
-                    return BoundBinaryOperatorKind.Subtraction;
-                case SyntaxKind.StarToken:
-                    return BoundBinaryOperatorKind.Multiplication;
-                case SyntaxKind.FSlashToken:
-                    return BoundBinaryOperatorKind.Division;
-                default:
-                    throw new Exception($"Unexpected binary operator {kind}");
-            }
+                SyntaxKind.LiteralExpressionToken => BindLiteralExpression((LiteralExpressionSyntax)syntax),
+                SyntaxKind.UnaryExpressionToken => BindUnaryExpression((UnaryExpressionSyntax)syntax),
+                SyntaxKind.BinaryExpressionToken => BindBinaryExpression((BinaryExpressionSyntax)syntax),
+                _ => throw new Exception($"Unexpected syntax {syntax.Kind}"),
+            };
         }
 
         private BoundExpression BindUnaryExpression(UnaryExpressionSyntax syntax)
@@ -80,16 +38,46 @@ namespace Hana.CodeAnalysis.Binding
             if (operandType != typeof(int))
                 return null;
 
-            switch (kind)
+            return kind switch
             {
-                case SyntaxKind.PlusToken:
-                    return BoundUnaryOperatorKind.Identity;
-                case SyntaxKind.MinusToken:
-                    return BoundUnaryOperatorKind.Negation;
-                default:
-                    throw new Exception($"Unexpected unary operator {kind}");
-            }
+                SyntaxKind.PlusToken => BoundUnaryOperatorKind.Identity,
+                SyntaxKind.MinusToken => BoundUnaryOperatorKind.Negation,
+                _ => throw new Exception($"Unexpected unary operator {kind}")
+            };
         }
+
+        private BoundExpression BindBinaryExpression(BinaryExpressionSyntax syntax)
+        {
+            var boundLeft = BindExpression(syntax.Left);
+            var boundRight = BindExpression(syntax.Right);
+            var boundOperatorKind = BindBinaryOperatorKind(syntax.OperatorToken.Kind, boundLeft.Type, boundRight.Type);
+
+
+            if (boundOperatorKind == null)
+            {
+
+                _diagnostics.Add($"Binary operator '{syntax.OperatorToken.Text}' is not defined for types {boundLeft.Type} and {boundRight.Type}.");
+                return boundLeft;
+            }
+
+            return new BoundBinaryExpression(boundLeft, boundOperatorKind.Value, boundRight);
+        }
+
+        private BoundBinaryOperatorKind? BindBinaryOperatorKind(SyntaxKind kind, Type leftType, Type rightType)
+        {
+            if (leftType != typeof(int) || rightType != typeof(int))
+                return null;
+
+            return kind switch
+            {
+                SyntaxKind.PlusToken => BoundBinaryOperatorKind.Addition,
+                SyntaxKind.MinusToken => BoundBinaryOperatorKind.Subtraction,
+                SyntaxKind.StarToken => BoundBinaryOperatorKind.Multiplication,
+                SyntaxKind.FSlashToken => BoundBinaryOperatorKind.Division,
+                _ => throw new Exception($"Unexpected binary operator {kind}")
+            };
+        }
+
 
         private BoundExpression BindLiteralExpression(LiteralExpressionSyntax syntax)
         {

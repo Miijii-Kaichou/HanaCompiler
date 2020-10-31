@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Hana.CodeAnalysis.Syntax
+﻿namespace Hana.CodeAnalysis.Syntax
 {
     /// <summary>
     /// Store all information of our syntax
@@ -42,9 +40,13 @@ namespace Hana.CodeAnalysis.Syntax
             switch (text)
             {
                 case "true":
+                case "TRUE":
                     return SyntaxKind.TrueKeyword;
+
                 case "false":
+                case "FALSE":
                     return SyntaxKind.FalseKeyword;
+
                 default:
                     return SyntaxKind.IdentifierToken;
             }

@@ -19,7 +19,7 @@ namespace Hana.CodeAnalysis.Syntax
             SyntaxToken token;
             do
             {
-                token = lexer.NextToken();
+                token = lexer.Lex();
                 if (token.Kind != SyntaxKind.WhiteSpaceToken &&
                     token.Kind != SyntaxKind.BadToken)
                 {
@@ -120,6 +120,7 @@ namespace Hana.CodeAnalysis.Syntax
                     var value = Current.Kind == SyntaxKind.TrueKeyword;
                     return new LiteralExpressionSyntax(keywordToken, value);
                 }
+
                 default:
                 {
                     var numberToken = MatchToken(SyntaxKind.NumberToken);

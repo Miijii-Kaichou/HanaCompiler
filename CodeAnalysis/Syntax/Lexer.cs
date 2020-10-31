@@ -28,7 +28,7 @@ namespace Hana.CodeAnalysis.Syntax
             }
         }
 
-        private int Lex()
+        private int Next()
         {
             //Go to next character
             return _position++;
@@ -39,10 +39,10 @@ namespace Hana.CodeAnalysis.Syntax
             string _errorMSG = $"ERROR : bad character input: '{Current }'";
             errorMessage = _errorMSG;
             _diagnostics.Add(_errorMSG);
-            return new SyntaxToken(SyntaxKind.BadToken, Lex(), _text.Substring(_position - 1, 1), null);
+            return new SyntaxToken(SyntaxKind.BadToken, Next(), _text.Substring(_position - 1, 1), null);
         }
 
-        public SyntaxToken NextToken()
+        public SyntaxToken Lex()
         {
             if (_position >= _text.Length)
                 return new SyntaxToken(SyntaxKind.EOFToken, _position, "\0", null);
@@ -52,7 +52,7 @@ namespace Hana.CodeAnalysis.Syntax
                 var start = _position;
 
                 while (char.IsDigit(Current))
-                    Lex();
+                    Next();
 
                 var length = _position - start;
                 var text = _text.Substring(start, length);
@@ -71,7 +71,7 @@ namespace Hana.CodeAnalysis.Syntax
                 var start = _position;
                 while (char.IsWhiteSpace(Current))
                 {
-                    Lex();
+                    Next();
                 }
 
                 var length = _position - start;
@@ -84,7 +84,7 @@ namespace Hana.CodeAnalysis.Syntax
                 var start = _position;
                 while (char.IsLetter(Current))
                 {
-                    Lex();
+                    Next();
                 }
 
                 var length = _position - start;
@@ -97,16 +97,16 @@ namespace Hana.CodeAnalysis.Syntax
 
             return Current switch
             {
-                '+' => new SyntaxToken(SyntaxKind.PlusToken, Lex(), "+", null),
-                '-' => new SyntaxToken(SyntaxKind.MinusToken, Lex(), "-", null),
-                '*' => new SyntaxToken(SyntaxKind.StarToken, Lex(), "*", null),
-                '/' => new SyntaxToken(SyntaxKind.FSlashToken, Lex(), "/", null),
-                '(' => new SyntaxToken(SyntaxKind.LParenToken, Lex(), "(", null),
-                ')' => new SyntaxToken(SyntaxKind.RParenToken, Lex(), ")", null),
-                '[' => new SyntaxToken(SyntaxKind.LBrackToken, Lex(), "[", null),
-                ']' => new SyntaxToken(SyntaxKind.RBrackToken, Lex(), "]", null),
-                '{' => new SyntaxToken(SyntaxKind.LCurlToken, Lex(), "{", null),
-                '}' => new SyntaxToken(SyntaxKind.RCurlToken, Lex(), "}", null),
+                '+' => new SyntaxToken(SyntaxKind.PlusToken, Next(), "+", null),
+                '-' => new SyntaxToken(SyntaxKind.MinusToken, Next(), "-", null),
+                '*' => new SyntaxToken(SyntaxKind.StarToken, Next(), "*", null),
+                '/' => new SyntaxToken(SyntaxKind.FSlashToken, Next(), "/", null),
+                '(' => new SyntaxToken(SyntaxKind.LParenToken, Next(), "(", null),
+                ')' => new SyntaxToken(SyntaxKind.RParenToken, Next(), ")", null),
+                '[' => new SyntaxToken(SyntaxKind.LBrackToken, Next(), "[", null),
+                ']' => new SyntaxToken(SyntaxKind.RBrackToken, Next(), "]", null),
+                '{' => new SyntaxToken(SyntaxKind.LCurlToken, Next(), "{", null),
+                '}' => new SyntaxToken(SyntaxKind.RCurlToken, Next(), "}", null),
                 _ => ThrowTokenError(out string errorMSG),
             };
         }

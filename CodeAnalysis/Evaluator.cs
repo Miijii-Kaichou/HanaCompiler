@@ -20,9 +20,6 @@ namespace Hana.CodeAnalysis
 
         private object EvaluateExpression(BoundExpression node)
         {
-            //Binary Expression
-            //Number Expression
-
             if (node is BoundLiteralExpression n)
                 return n.Value;
 
@@ -52,9 +49,6 @@ namespace Hana.CodeAnalysis
                     _ => throw new Exception($"Unexpected binary operator {b.OperatorKind}")
                 };
             }
-
-            //if (node is ParenthesizedExpressionSyntax p)
-            //    return EvaluateExpression(p.Expression);
 
             throw new Exception($"Unexpected node {node.Kind}");
         }

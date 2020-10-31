@@ -12,13 +12,11 @@ namespace Hana.CodeAnalysis.Binding
             Right = right;
         }
         public override BoundNodeKind Kind => BoundNodeKind.BinaryExpression;
+        public override Type Type => Left.Type;
 
         public BoundExpression Left { get; }
         public BoundBinaryOperatorKind OperatorKind { get; }
         public BoundExpression Right { get; }
-
-        public override Type Type => Left.Type;
-
 
     }
 }
