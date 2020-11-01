@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7bn15GuMMHIr3ax29ThkuEE5LkDQLOd8R8XPGPzLVeBYZ9g1ti6gN0gGhK29wzxuZV36qm1/WXQHJt6Ry6yq7w==",
+  "dgSpecHash": "XyRTMPa6ATbVFaJIbO7oXBy69z9ViQDqzR76z9r2npHmvfyyC63433wvy1N6lR0i1OkUzT03m6cH+3lXo72NrA==",
   "success": true,
-  "projectFilePath": "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaCompiler\\HC.csproj",
+  "projectFilePath": "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaC\\HC.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

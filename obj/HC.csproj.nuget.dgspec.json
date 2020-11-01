@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaCompiler\\HC.csproj": {}
+    "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaC\\HC.csproj": {}
   },
   "projects": {
-    "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaCompiler\\HC.csproj": {
+    "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaC\\HC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaCompiler\\HC.csproj",
+        "projectUniqueName": "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaC\\HC.csproj",
         "projectName": "HC",
-        "projectPath": "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaCompiler\\HC.csproj",
+        "projectPath": "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaC\\HC.csproj",
         "packagesPath": "C:\\Users\\tclte\\.nuget\\packages\\",
-        "outputPath": "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaCompiler\\obj\\",
+        "outputPath": "E:\\Documents\\Repositories\\C#\\HanaCompiler\\HanaC\\HanaC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
